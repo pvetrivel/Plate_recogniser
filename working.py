@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import pytesseract
+import re
 
 #def canny(image):
 #    gray=cv2.cvtColor(lane_image,cv2.COLOR_RGB2GRAY)
@@ -22,7 +23,11 @@ img = cv2.dilate(lane_image, kernel, iterations=1)
 cv2.imwrite("removed_noise.png", img)
 result = pytesseract.image_to_string("removed_noise.png")
 print(pytesseract.image_to_string("thres.png"))
-print(result)
+result=re.sub('[^A-Za-z0-9]+', '', result)
+f = open('helloworld.txt','w')
+f.write(result)
+f.close()
+#print(result)
 
 
 #plt.imshow(img)
